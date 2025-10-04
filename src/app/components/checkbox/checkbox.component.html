@@ -1,0 +1,221 @@
+<section class="p-4">
+  <h1 class="mb-4">Ejemplos del Componente sa-checkbox</h1>
+
+  <!-- ========== EJEMPLOS BÁSICOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplos Básicos</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-checkbox label="Acepto los términos y condiciones"></sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox label="Opción seleccionada" [checked]="true"></sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox label="Campo requerido" [required]="true"></sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox
+          label="Con texto de ayuda"
+          helperText="Esta es información adicional útil">
+        </sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox
+          label="Con error"
+          status="error"
+          errorText="Debe aceptar para continuar">
+        </sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox
+          label="Con success"
+          status="success"
+          [checked]="true">
+        </sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox
+          label="Deshabilitado"
+          [disabled]="true">
+        </sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox
+          label="Deshabilitado y marcado"
+          [disabled]="true"
+          [checked]="true">
+        </sa-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Tamaños (size)</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-checkbox label="Small (sm)" size="sm"></sa-checkbox>
+      </div>
+      <div class="col-md-4">
+        <sa-checkbox label="Medium (md)" size="md"></sa-checkbox>
+      </div>
+      <div class="col-md-4">
+        <sa-checkbox label="Large (lg)" size="lg"></sa-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TEXTO EN NEGRITA ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Texto en Negrita (bold)</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-checkbox label="Texto normal" size="lg"></sa-checkbox>
+      </div>
+      <div class="col-md-6">
+        <sa-checkbox label="Texto en negrita" size="lg" [bold]="true"></sa-checkbox>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades (Formulario Reactivo)</h2>
+    <div class="row g-3">
+      <div class="col-md-8">
+        <form [formGroup]="formCompleto">
+          <sa-checkbox
+            label="Acepto los términos y condiciones"
+            formControlName="checkboxCompleto"
+            size="lg"
+            status="default"
+            helperText="Este checkbox tiene todas las propiedades configuradas"
+            id="checkbox-completo"
+            name="checkboxCompleto"
+            value="aceptado"
+            [bold]="true"
+            [required]="isRequired"
+            [disabled]="isDisabled"
+            (checkedChange)="onCheckedChange($event)"
+            (change)="onChange($event)"
+            (focusin)="onFocus($event)"
+            (focusout)="onBlur($event)">
+          </sa-checkbox>
+        </form>
+
+        <div class="mt-3">
+          <p><strong>Estado:</strong> {{ valorCheckboxCompleto ? 'Marcado' : 'No marcado' }}</p>
+          <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+            Toggle Required ({{ isRequired }})
+          </button>
+          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+            Toggle Disabled ({{ isDisabled }})
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO PRÁCTICO: GRUPO DE CHECKBOXES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo Práctico: Grupo de Checkboxes (Formulario Reactivo)</h2>
+    <form [formGroup]="formGrupo">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <h4 class="mb-3">Selecciona tus intereses</h4>
+          <div class="mb-2">
+            <sa-checkbox
+              label="Deportes"
+              formControlName="deportes">
+            </sa-checkbox>
+          </div>
+          <div class="mb-2">
+            <sa-checkbox
+              label="Tecnología"
+              formControlName="tecnologia">
+            </sa-checkbox>
+          </div>
+          <div class="mb-2">
+            <sa-checkbox
+              label="Música"
+              formControlName="musica">
+            </sa-checkbox>
+          </div>
+          <div class="mb-2">
+            <sa-checkbox
+              label="Arte"
+              formControlName="arte">
+            </sa-checkbox>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h4 class="mb-3">Preferencias</h4>
+          <div class="mb-2">
+            <sa-checkbox
+              label="Recibir notificaciones por email"
+              formControlName="notificaciones"
+              helperText="Te enviaremos actualizaciones importantes">
+            </sa-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <p><strong>Cantidad de intereses seleccionados:</strong> {{ cantidadSeleccionados }}</p>
+        <p><strong>Datos completos:</strong></p>
+        <pre>{{ valoresGrupo | json }}</pre>
+      </div>
+    </form>
+  </div>
+
+  <!-- ========== GRUPO POR TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Diferentes Tamaños en Grupo</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <h5>Small</h5>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 1" size="sm"></sa-checkbox>
+        </div>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 2" size="sm"></sa-checkbox>
+        </div>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 3" size="sm"></sa-checkbox>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>Medium</h5>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 1" size="md"></sa-checkbox>
+        </div>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 2" size="md"></sa-checkbox>
+        </div>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 3" size="md"></sa-checkbox>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>Large</h5>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 1" size="lg"></sa-checkbox>
+        </div>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 2" size="lg"></sa-checkbox>
+        </div>
+        <div class="mb-2">
+          <sa-checkbox label="Opción 3" size="lg"></sa-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

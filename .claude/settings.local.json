@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/AmbienteDesarrollo/Angular/Sanna/Front/amena-ui-corporativo-sanna/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

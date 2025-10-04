@@ -1,0 +1,245 @@
+<section class="p-4">
+  <h1 class="mb-4">Ejemplos del Componente sa-select</h1>
+
+  <!-- ========== EJEMPLOS BÁSICOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplos Básicos, si no se usa bindValue y bindLabel tomará por defecto el valor y el label del array [options]</h2>
+    <div class="row g-3">
+      <!-- 1. Select básico -->
+      <div class="col-md-4">
+        <sa-select
+          label="Selecciona una opción"
+          [options]="opcionesSimples"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 2. Con valor preseleccionado -->
+      <div class="col-md-4">
+        <sa-select
+          label="Con valor inicial"
+          [options]="opcionesSimples"
+          value="2"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 3. Campo requerido -->
+      <div class="col-md-4">
+        <sa-select
+          label="Campo requerido"
+          [options]="opcionesSimples"
+          required="true"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 4. Con texto de ayuda -->
+      <div class="col-md-4">
+        <sa-select
+          label="Con helper text"
+          [options]="opcionesSimples"
+          helperText="Selecciona una opción de la lista"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 5. Con error -->
+      <div class="col-md-4">
+        <sa-select
+          label="Con error"
+          [options]="opcionesSimples"
+          status="error"
+          errorText="Este campo es requerido"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 6. Con estado success -->
+      <div class="col-md-4">
+        <sa-select
+          label="Con success"
+          [options]="opcionesSimples"
+          value="3"
+          status="success"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 7. Disabled -->
+      <div class="col-md-4">
+        <sa-select
+          label="Deshabilitado"
+          [options]="opcionesSimples"
+          disabled="true"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+      <!-- 8. Readonly -->
+      <div class="col-md-4">
+        <sa-select
+          label="Solo lectura"
+          [options]="opcionesSimples"
+          value="2"
+          readonly="true"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Tamaños (size)</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-select
+          label="Small (sm)"
+          [options]="opcionesSimples"
+          size="sm"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+      <div class="col-md-4">
+        <sa-select
+          label="Medium (md)"
+          [options]="opcionesSimples"
+          size="md"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+      <div class="col-md-4">
+        <sa-select
+          label="Large (lg)"
+          [options]="opcionesSimples"
+          size="lg"
+          placeholder="--Seleccione--">
+        </sa-select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== BIND VALUE Y BIND LABEL ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">bindValue y bindLabel (Estructura Personalizada)</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-select
+          label="Seleccione paciente"
+          [options]="pacientes"
+          bindValue="cpac_id"
+          bindLabel="nombre_completo"
+          placeholder="--Seleccione un paciente--"
+          helperText="Usando bindValue='cpac_id' y bindLabel='nombre_completo'">
+        </sa-select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VALIDACIÓN DINÁMICA CON STATUS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Validación Dinámica con Status</h2>
+    <div class="row g-3">
+      <div class="col-md-12">
+        <form [formGroup]="formCompleto">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <sa-select
+                label="País (requerido)"
+                formControlName="selectCompleto"
+                [options]="opcionesSimples"
+                placeholder="--Seleccione un país--"
+                [status]="
+                  formCompleto.get('selectCompleto')?.invalid &&
+                  formCompleto.get('selectCompleto')?.touched
+                    ? 'error'
+                    : formCompleto.get('selectCompleto')?.valid
+                    ? 'success'
+                    : 'default'
+                "
+                [errorText]="
+                  formCompleto.get('selectCompleto')?.hasError('required')
+                    ? 'Debe seleccionar un país'
+                    : ''
+                "
+                helperText="El status cambia según la validación">
+              </sa-select>
+            </div>
+            <div class="col-md-6">
+              <div class="mt-4">
+                <p><strong>Estado del campo:</strong></p>
+                <ul class="small">
+                  <li>Valor: {{ formCompleto.get('selectCompleto')?.value || 'vacío' }}</li>
+                  <li>Valid: {{ formCompleto.get('selectCompleto')?.valid }}</li>
+                  <li>Touched: {{ formCompleto.get('selectCompleto')?.touched }}</li>
+                  <li>Status mostrado:
+                    <sa-tag
+                      [text]="
+                        formCompleto.get('selectCompleto')?.invalid && formCompleto.get('selectCompleto')?.touched
+                          ? 'error'
+                          : formCompleto.get('selectCompleto')?.valid
+                          ? 'success'
+                          : 'default'
+                      "
+                      [type]="
+                        formCompleto.get('selectCompleto')?.invalid && formCompleto.get('selectCompleto')?.touched
+                          ? 'danger'
+                          : formCompleto.get('selectCompleto')?.valid
+                          ? 'success'
+                          : 'secondary'
+                      "
+                      size="small">
+                    </sa-tag>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-select
+          label="Select Completo"
+          [options]="opcionesSimples"
+          [value]="valorSeleccionado"
+          size="lg"
+          status="default"
+          placeholder="--Seleccione una opción--"
+          helperText="Este select tiene todas las propiedades configuradas"
+          id="select-completo"
+          name="selectCompleto"
+          bindValue="value"
+          bindLabel="label"
+          showPlaceholder="true"
+          [required]="isRequired"
+          [disabled]="isDisabled"
+          (valueChange)="onValueChange($event)"
+          (change)="onChange($event)">
+        </sa-select>
+
+        <div class="mt-3">
+          <p><strong>Valor seleccionado:</strong> {{ valorSeleccionado || 'Ninguno' }}</p>
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+            Toggle Required ({{ isRequired }})
+          </button>
+          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+            Toggle Disabled ({{ isDisabled }})
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

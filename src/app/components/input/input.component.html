@@ -1,0 +1,432 @@
+<section class="p-4">
+  <h1 class="mb-4">Ejemplos del Componente sa-input</h1>
+
+  <!-- ========== EJEMPLOS BÁSICOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplos Básicos</h2>
+    <div class="row g-3">
+      <!-- 1. Input básico -->
+      <div class="col-md-4">
+        <sa-input
+          label="Nombre"
+          placeholder="Ingrese su nombre"
+          type="text">
+        </sa-input>
+      </div>
+
+      <!-- 3. Campo requerido -->
+      <div class="col-md-4">
+        <sa-input
+          label="Campo requerido"
+          placeholder="Campo obligatorio"
+          [required]="true"
+          type="text">
+        </sa-input>
+      </div>
+
+      <!-- 5. Con error -->
+      <div class="col-md-4">
+        <sa-input
+          label="Con error"
+          type="text"
+          status="error"
+          errorText="Este campo es requerido">
+        </sa-input>
+      </div>
+
+      <!-- 6. Con success -->
+      <div class="col-md-4">
+        <sa-input
+          label="Con success"
+          type="text"
+          value="Valor válido"
+          status="success">
+        </sa-input>
+      </div>
+
+      <!-- 7. Disabled -->
+      <div class="col-md-4">
+        <sa-input
+          label="Deshabilitado"
+          [disabled]="true">
+        </sa-input>
+      </div>
+
+      <!-- 9. Password -->
+      <div class="col-md-4">
+        <sa-input
+          label="Contraseña"
+          type="password"
+          placeholder="Ingrese su contraseña">
+        </sa-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Tamaños (size)</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-input
+          label="Small (sm)"
+          size="sm"
+          placeholder="Input pequeño">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Medium (md)"
+          size="md"
+          placeholder="Input mediano">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Large (lg)"
+          size="lg"
+          placeholder="Input grande">
+        </sa-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ICONOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Con Iconos</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-input
+          label="Con icono izquierdo"
+          leftIcon="user"
+          placeholder="Usuario">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Con icono derecho"
+          rightIcon="search"
+          placeholder="Buscar...">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Con ambos iconos"
+          leftIcon="user"
+          rightIcon="search"
+          placeholder="Email verificado">
+        </sa-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TIPOS DE INPUT ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Tipos de Input (type)</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-input
+          label="Texto"
+          type="text"
+          placeholder="Texto normal">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Teléfono"
+          type="tel"
+          placeholder="+51 999 999 999">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Número"
+          type="number"
+          placeholder="123"
+          [min]="0"
+          [max]="100">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Contraseña"
+          type="password"
+          placeholder="********">
+        </sa-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VALIDACIONES INTEGRADAS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Validaciones Integradas</h2>
+
+    <h4 class="mb-3">Solo Números (saNumbersOnly)</h4>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <sa-input
+          label="Solo números enteros"
+          placeholder="123"
+          [saNumbersOnly]="true"
+          [allowDecimals]="false"
+          [allowNegative]="false"
+          helperText="Solo números positivos">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Con decimales"
+          placeholder="123.45"
+          [saNumbersOnly]="true"
+          [allowDecimals]="true"
+          [maxDecimals]="2"
+          helperText="Hasta 2 decimales">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Con negativos"
+          placeholder="-123.45"
+          [saNumbersOnly]="true"
+          [allowDecimals]="true"
+          [allowNegative]="true"
+          helperText="Permite negativos">
+        </sa-input>
+      </div>
+    </div>
+
+    <h4 class="mb-3">Solo Letras (saLettersOnly)</h4>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-input
+          label="Solo letras"
+          placeholder="ABC"
+          [saLettersOnly]="true"
+          [allowSpaces]="true"
+          [allowAccents]="true"
+          helperText="Letras, espacios y acentos">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Sin espacios"
+          placeholder="ABC"
+          [saLettersOnly]="true"
+          [allowSpaces]="false"
+          helperText="Sin espacios">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Sin acentos"
+          placeholder="ABC"
+          [saLettersOnly]="true"
+          [allowAccents]="false"
+          helperText="Solo A-Z">
+        </sa-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== COLORES PERSONALIZADOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Colores Personalizados</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-input
+          label="Fondo personalizado"
+          backgroundColor="#e6f3ff"
+          placeholder="Fondo azul claro">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Texto personalizado"
+          textColor="#0066cc"
+          value="Texto azul"
+          placeholder="Color de texto">
+        </sa-input>
+      </div>
+      <div class="col-md-4">
+        <sa-input
+          label="Texto en negrita"
+          [boldText]="true"
+          value="Texto bold"
+          placeholder="Texto en negrita">
+        </sa-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VALIDACIÓN DINÁMICA CON STATUS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Validación Dinámica con Status</h2>
+    <div class="row g-3">
+      <div class="col-md-12">
+        <form [formGroup]="formCompleto">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <sa-input
+                label="Email (requerido, mínimo 3 caracteres)"
+                formControlName="inputCompleto"
+                type="email"
+                placeholder="ejemplo@correo.com"
+                [status]="
+                  formCompleto.get('inputCompleto')?.invalid &&
+                  formCompleto.get('inputCompleto')?.touched
+                    ? 'error'
+                    : formCompleto.get('inputCompleto')?.valid
+                    ? 'success'
+                    : 'default'
+                "
+                [errorText]="
+                  formCompleto.get('inputCompleto')?.hasError('required')
+                    ? 'El email es requerido'
+                    : formCompleto.get('inputCompleto')?.hasError('minlength')
+                    ? 'Mínimo 3 caracteres'
+                    : formCompleto.get('inputCompleto')?.hasError('maxlength')
+                    ? 'Máximo 50 caracteres'
+                    : ''
+                "
+                helperText="El status cambia según la validación">
+              </sa-input>
+            </div>
+            <div class="col-md-6">
+              <div class="mt-4">
+                <p><strong>Estado del campo:</strong></p>
+                <ul class="small">
+                  <li>Valor: {{ formCompleto.get('inputCompleto')?.value || 'vacío' }}</li>
+                  <li>Valid: {{ formCompleto.get('inputCompleto')?.valid }}</li>
+                  <li>Touched: {{ formCompleto.get('inputCompleto')?.touched }}</li>
+                  <li>Status mostrado:
+                    <sa-tag
+                      [text]="
+                        formCompleto.get('inputCompleto')?.invalid && formCompleto.get('inputCompleto')?.touched
+                          ? 'error'
+                          : formCompleto.get('inputCompleto')?.valid
+                          ? 'success'
+                          : 'default'
+                      "
+                      [type]="
+                        formCompleto.get('inputCompleto')?.invalid && formCompleto.get('inputCompleto')?.touched
+                          ? 'danger'
+                          : formCompleto.get('inputCompleto')?.valid
+                          ? 'success'
+                          : 'secondary'
+                      "
+                      size="small">
+                    </sa-tag>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades (Formulario Reactivo)</h2>
+    <div class="row g-3">
+      <div class="col-md-8">
+        <form [formGroup]="formCompleto">
+          <sa-input
+            label="Input Completo"
+            formControlName="inputCompleto"
+            type="text"
+            size="lg"
+            status="default"
+            placeholder="Ingrese un texto..."
+            helperText="Este input tiene todas las propiedades configuradas"
+            leftIcon="user"
+            id="input-completo"
+            name="inputCompleto"
+            autocomplete="off"
+            [minlength]="3"
+            [maxlength]="50"
+            [required]="isRequired"
+            [disabled]="isDisabled"
+            (valueChange)="onValueChange($event)"
+            (change)="onChange($event)"
+            (enter)="onEnter($event)"
+            (focusin)="onFocus($event)"
+            (focusout)="onBlur($event)">
+          </sa-input>
+        </form>
+
+        <div class="mt-3">
+          <p><strong>Valor actual:</strong> {{ valorInputCompleto }}</p>
+          <p><strong>Estado del formulario (mínimo 3 digitos):</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+            Toggle Required ({{ isRequired }})
+          </button>
+          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+            Toggle Disabled ({{ isDisabled }})
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO PRÁCTICO DE VALIDACIONES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo Práctico: Formulario de Producto (Formulario Reactivo)</h2>
+    <form [formGroup]="formProducto">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <sa-input
+            label="Código de producto"
+            placeholder="Solo números"
+            formControlName="codigoProducto"
+            [saNumbersOnly]="true"
+            [allowDecimals]="false"
+            [allowNegative]="false"
+            leftIcon="qrcode"
+            helperText="Ingrese solo números enteros">
+          </sa-input>
+          <small><strong>Valor:</strong> {{ valorCodigoProducto }}</small>
+        </div>
+
+        <div class="col-md-4">
+          <sa-input
+            label="Precio"
+            placeholder="0.00"
+            formControlName="precio"
+            [saNumbersOnly]="true"
+            [allowDecimals]="true"
+            [allowNegative]="false"
+            [maxDecimals]="2"
+            leftIcon="save"
+            helperText="Máximo 2 decimales">
+          </sa-input>
+          <small><strong>Valor:</strong> {{ valorPrecio }}</small>
+        </div>
+
+        <div class="col-md-4">
+          <sa-input
+            label="Nombre del producto"
+            placeholder="Solo letras"
+            formControlName="nombreProducto"
+            [saLettersOnly]="true"
+            [allowSpaces]="true"
+            [allowAccents]="true"
+            leftIcon="box"
+            helperText="Solo letras y espacios">
+          </sa-input>
+          <small><strong>Valor:</strong> {{ valorNombreProducto }}</small>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <p><strong>Datos completos:</strong></p>
+        <pre>{{ formProducto.value | json }}</pre>
+      </div>
+    </form>
+  </div>
+
+</section>

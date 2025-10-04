@@ -1,0 +1,214 @@
+<section class="p-4">
+  <h1 class="mb-4">Ejemplos del Componente sa-switch</h1>
+
+  <!-- ========== EJEMPLOS BÁSICOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplos Básicos</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-switch label="Activar notificaciones"></sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch label="Modo oscuro" [value]="true"></sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch label="Campo requerido" [required]="true"></sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch
+          label="Con texto de ayuda"
+          helperText="Esta opción puede ser cambiada en cualquier momento">
+        </sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch
+          label="Con error"
+          status="error"
+          errorText="Debes activar esta opción para continuar">
+        </sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch
+          label="Con success"
+          status="success"
+          [value]="true">
+        </sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch
+          label="Deshabilitado"
+          [disabled]="true">
+        </sa-switch>
+      </div>
+      <div class="col-md-6">
+        <sa-switch
+          label="Deshabilitado y activado"
+          [disabled]="true"
+          [value]="true">
+        </sa-switch>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Tamaños (size)</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-switch label="Small (sm)" size="sm" [value]="true"></sa-switch>
+      </div>
+      <div class="col-md-4">
+        <sa-switch label="Medium (md)" size="md" [value]="true"></sa-switch>
+      </div>
+      <div class="col-md-4">
+        <sa-switch label="Large (lg)" size="lg" [value]="true"></sa-switch>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades (Formulario Reactivo)</h2>
+    <div class="row g-3">
+      <div class="col-md-8">
+        <form [formGroup]="formCompleto">
+          <sa-switch
+            label="Acepto los términos y condiciones"
+            formControlName="switchCompleto"
+            size="lg"
+            status="default"
+            helperText="Este switch tiene todas las propiedades configuradas"
+            id="switch-completo"
+            name="switchCompleto"
+            [required]="isRequired"
+            [disabled]="isDisabled"
+            (valueChange)="onValueChange($event)"
+            (change)="onChange($event)"
+            (focusin)="onFocus($event)"
+            (focusout)="onBlur($event)">
+          </sa-switch>
+        </form>
+
+        <div class="mt-3">
+          <p><strong>Estado:</strong> {{ valorSwitchCompleto ? 'Activado' : 'Desactivado' }}</p>
+          <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+            Toggle Required ({{ isRequired }})
+          </button>
+          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+            Toggle Disabled ({{ isDisabled }})
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO PRÁCTICO: CONFIGURACIÓN ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo Práctico: Panel de Configuración (Formulario Reactivo)</h2>
+    <form [formGroup]="formConfiguracion">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h4 class="mb-3">Notificaciones</h4>
+          <div class="mb-3">
+            <sa-switch
+              label="Activar notificaciones"
+              formControlName="notificaciones"
+              name="notificaciones"
+              helperText="Recibe alertas sobre actividad importante"
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)">
+            </sa-switch>
+          </div>
+          <div class="mb-3">
+            <sa-switch
+              label="Emails de marketing"
+              formControlName="emailsMarketing"
+              name="emailsMarketing"
+              helperText="Recibe ofertas y promociones especiales"
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)">
+            </sa-switch>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h4 class="mb-3">Preferencias</h4>
+          <div class="mb-3">
+            <sa-switch
+              label="Modo oscuro"
+              formControlName="modoOscuro"
+              name="modoOscuro"
+              helperText="Cambia la apariencia a modo oscuro"
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)">
+            </sa-switch>
+          </div>
+          <div class="mb-3">
+            <sa-switch
+              label="Sincronización automática"
+              formControlName="sincronizacionAutomatica"
+              name="sincronizacionAutomatica"
+              helperText="Sincroniza tus datos automáticamente"
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)">
+            </sa-switch>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <p><strong>Switches activados:</strong> {{ cantidadActivados }} de 4</p>
+        <p><strong>Configuración completa:</strong></p>
+        <pre>{{ valoresConfiguracion | json }}</pre>
+      </div>
+    </form>
+  </div>
+
+  <!-- ========== GRUPO POR TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Diferentes Tamaños en Grupo</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <h5>Small</h5>
+        <div class="mb-2">
+          <sa-switch label="Opción 1" size="sm" [value]="true"></sa-switch>
+        </div>
+        <div class="mb-2">
+          <sa-switch label="Opción 2" size="sm"></sa-switch>
+        </div>
+        <div class="mb-2">
+          <sa-switch label="Opción 3" size="sm" [value]="true"></sa-switch>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>Medium</h5>
+        <div class="mb-2">
+          <sa-switch label="Opción 1" size="md" [value]="true"></sa-switch>
+        </div>
+        <div class="mb-2">
+          <sa-switch label="Opción 2" size="md"></sa-switch>
+        </div>
+        <div class="mb-2">
+          <sa-switch label="Opción 3" size="md" [value]="true"></sa-switch>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>Large</h5>
+        <div class="mb-2">
+          <sa-switch label="Opción 1" size="lg" [value]="true"></sa-switch>
+        </div>
+        <div class="mb-2">
+          <sa-switch label="Opción 2" size="lg"></sa-switch>
+        </div>
+        <div class="mb-2">
+          <sa-switch label="Opción 3" size="lg" [value]="true"></sa-switch>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,32 @@
+section {
+  min-height: 100vh;
+  padding: 20px 30px 30px 30px;
+}
+
+section h1 {
+  color: #333;
+  margin-bottom: 2rem !important;
+}
+
+section h2 {
+  color: #555;
+  margin-bottom: 1.5rem !important;
+}
+
+// Espaciado adicional para los botones
+.d-flex {
+  margin-bottom: 2rem;
+  
+  sa-button {
+    margin-right: 1rem !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Espaciado para los botones de control
+.mt-4 {
+  button {
+    margin-right: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+}

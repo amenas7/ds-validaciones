@@ -1,0 +1,419 @@
+<section class="p-4">
+  <h1 class="mb-4">Ejemplos del Componente sa-textarea</h1>
+
+  <!-- ========== EJEMPLOS BÁSICOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplos Básicos</h2>
+    <div class="row g-3">
+      <!-- 1. Textarea básico -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Comentarios"
+          placeholder="Escriba sus comentarios aquí..."
+          [rows]="3">
+        </sa-textarea>
+      </div>
+
+      <!-- 2. Con valor inicial -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Con valor inicial"
+          value="Este es un texto de ejemplo"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+
+      <!-- 3. Campo requerido -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Campo requerido"
+          placeholder="Campo obligatorio"
+          [required]="true"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+
+      <!-- 4. Con helper text -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Feedback"
+          placeholder="Comparta sus comentarios..."
+          helperText="Sus comentarios nos ayudan a mejorar"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+
+      <!-- 5. Con error -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Con error"
+          status="error"
+          errorText="El mensaje debe tener al menos 10 caracteres"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+
+      <!-- 6. Con success -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Con success"
+          value="Comentario validado correctamente"
+          status="success"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+
+      <!-- 7. Disabled -->
+      <div class="col-md-6">
+        <sa-textarea
+          label="Deshabilitado"
+          value="Este contenido no se puede editar"
+          [disabled]="true"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAMAÑOS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Tamaños (size)</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-textarea
+          label="Small (sm)"
+          size="sm"
+          placeholder="Textarea pequeño"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+      <div class="col-md-4">
+        <sa-textarea
+          label="Medium (md)"
+          size="md"
+          placeholder="Textarea mediano"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+      <div class="col-md-4">
+        <sa-textarea
+          label="Large (lg)"
+          size="lg"
+          placeholder="Textarea grande"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OPCIONES DE RESIZE ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Opciones de Redimensionamiento (resize)</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-textarea
+          label="No redimensionable"
+          placeholder="resize='none'"
+          resize="none"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ALTURA FIJA ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Altura Fija (height)</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-textarea
+          label="Altura fija 100px"
+          placeholder="Este textarea tiene altura fija de 100px"
+          [height]="100"
+          value="Este textarea tiene una altura fija. Cuando el contenido excede esta altura, aparece automáticamente un scroll vertical.">
+        </sa-textarea>
+      </div>
+      <div class="col-md-6">
+        <sa-textarea
+          label="Altura fija 150px"
+          placeholder="Este textarea tiene altura fija de 150px"
+          [height]="150"
+          value="Este textarea tiene una altura fija de 150 píxeles. El resize manual está deshabilitado.">
+        </sa-textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== LÍMITES DE LONGITUD ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Límites de Longitud</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-textarea
+          label="Con mínimo y máximo"
+          placeholder="Entre 10 y 200 caracteres"
+          [minlength]="10"
+          [maxlength]="200"
+          helperText="Mínimo 10 caracteres, máximo 200"
+          [rows]="4">
+        </sa-textarea>
+      </div>
+      <div class="col-md-6">
+        <sa-textarea
+          label="Solo máximo"
+          placeholder="Máximo 100 caracteres"
+          [maxlength]="100"
+          helperText="Máximo 100 caracteres"
+          [rows]="4">
+        </sa-textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VALIDACIONES INTEGRADAS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Validaciones Integradas</h2>
+
+    <h4 class="mb-3">Solo Números (saNumbersOnly)</h4>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <sa-textarea
+          label="Solo números enteros"
+          placeholder="123"
+          [saNumbersOnly]="true"
+          [allowDecimals]="false"
+          [allowNegative]="false"
+          helperText="Solo números positivos"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+      <div class="col-md-4">
+        <sa-textarea
+          label="Con decimales"
+          placeholder="123.45"
+          [saNumbersOnly]="true"
+          [allowDecimals]="true"
+          [maxDecimals]="2"
+          helperText="Hasta 2 decimales"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+      <div class="col-md-4">
+        <sa-textarea
+          label="Con negativos"
+          placeholder="-123.45"
+          [saNumbersOnly]="true"
+          [allowDecimals]="true"
+          [allowNegative]="true"
+          helperText="Permite negativos"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+    </div>
+
+    <h4 class="mb-3">Solo Letras (saLettersOnly)</h4>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <sa-textarea
+          label="Solo letras"
+          placeholder="ABC"
+          [saLettersOnly]="true"
+          [allowSpaces]="true"
+          [allowAccents]="true"
+          helperText="Letras, espacios y acentos"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+      <div class="col-md-4">
+        <sa-textarea
+          label="Sin espacios"
+          placeholder="ABC"
+          [saLettersOnly]="true"
+          [allowSpaces]="false"
+          helperText="Sin espacios"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+      <div class="col-md-4">
+        <sa-textarea
+          label="Sin acentos"
+          placeholder="ABC"
+          [saLettersOnly]="true"
+          [allowAccents]="false"
+          helperText="Solo A-Z"
+          [rows]="3">
+        </sa-textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VALIDACIÓN DINÁMICA CON STATUS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Validación Dinámica con Status</h2>
+    <div class="row g-3">
+      <div class="col-md-12">
+        <form [formGroup]="formCompleto">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <sa-textarea
+                label="Comentarios (mínimo 10, máximo 500 caracteres)"
+                formControlName="textareaCompleto"
+                placeholder="Ingrese sus comentarios..."
+                [rows]="4"
+                [status]="
+                  formCompleto.get('textareaCompleto')?.invalid &&
+                  formCompleto.get('textareaCompleto')?.touched
+                    ? 'error'
+                    : formCompleto.get('textareaCompleto')?.valid
+                    ? 'success'
+                    : 'default'
+                "
+                [errorText]="
+                  formCompleto.get('textareaCompleto')?.hasError('minlength')
+                    ? 'Mínimo 10 caracteres'
+                    : formCompleto.get('textareaCompleto')?.hasError('maxlength')
+                    ? 'Máximo 500 caracteres'
+                    : ''
+                "
+                helperText="El status cambia según la validación">
+              </sa-textarea>
+            </div>
+            <div class="col-md-6">
+              <div class="mt-4">
+                <p><strong>Estado del campo:</strong></p>
+                <ul class="small">
+                  <li>Valor: {{ formCompleto.get('textareaCompleto')?.value || 'vacío' }}</li>
+                  <li>Longitud: {{ formCompleto.get('textareaCompleto')?.value?.length || 0 }} caracteres</li>
+                  <li>Valid: {{ formCompleto.get('textareaCompleto')?.valid }}</li>
+                  <li>Touched: {{ formCompleto.get('textareaCompleto')?.touched }}</li>
+                  <li>Status mostrado:
+                    <sa-tag
+                      [text]="
+                        formCompleto.get('textareaCompleto')?.invalid && formCompleto.get('textareaCompleto')?.touched
+                          ? 'error'
+                          : formCompleto.get('textareaCompleto')?.valid
+                          ? 'success'
+                          : 'default'
+                      "
+                      [type]="
+                        formCompleto.get('textareaCompleto')?.invalid && formCompleto.get('textareaCompleto')?.touched
+                          ? 'danger'
+                          : formCompleto.get('textareaCompleto')?.valid
+                          ? 'success'
+                          : 'secondary'
+                      "
+                      size="small">
+                    </sa-tag>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades (Formulario Reactivo)</h2>
+    <div class="row g-3">
+      <div class="col-md-8">
+        <form [formGroup]="formCompleto">
+          <sa-textarea
+            label="Textarea Completo"
+            formControlName="textareaCompleto"
+            size="lg"
+            status="default"
+            placeholder="Escriba un comentario (min 10, max 500 caracteres)..."
+            helperText="Este textarea tiene todas las propiedades configuradas"
+            id="textarea-completo"
+            name="textareaCompleto"
+            [rows]="5"
+            [minlength]="10"
+            [maxlength]="500"
+            resize="vertical"
+            [required]="isRequired"
+            [disabled]="isDisabled"
+            (valueChange)="onValueChange($event)"
+            (change)="onChange($event)"
+            (focusin)="onFocus($event)"
+            (focusout)="onBlur($event)">
+          </sa-textarea>
+        </form>
+
+        <div class="mt-3">
+          <p><strong>Valor actual:</strong> {{ valorTextareaCompleto }}</p>
+          <p><strong>Longitud:</strong> {{ valorTextareaCompleto === 'Ninguno' ? 0 : valorTextareaCompleto.length }} caracteres</p>
+          <p><strong>Estado del formulario (mínimo 10 caracteres):</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+            Toggle Required ({{ isRequired }})
+          </button>
+          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+            Toggle Disabled ({{ isDisabled }})
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO PRÁCTICO DE VALIDACIONES ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo Práctico: Formulario de Comentarios (Formulario Reactivo)</h2>
+    <form [formGroup]="formComentarios">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <sa-textarea
+            label="Código de lote"
+            placeholder="Solo números"
+            formControlName="codigoLote"
+            [saNumbersOnly]="true"
+            [allowDecimals]="false"
+            [allowNegative]="false"
+            helperText="Ingrese solo números enteros"
+            [rows]="3">
+          </sa-textarea>
+          <small><strong>Valor:</strong> {{ valorCodigoLote }}</small>
+        </div>
+
+        <div class="col-md-4">
+          <sa-textarea
+            label="Observaciones médicas"
+            placeholder="Solo letras"
+            formControlName="observaciones"
+            [saLettersOnly]="true"
+            [allowSpaces]="true"
+            [allowAccents]="true"
+            helperText="Solo letras y espacios"
+            [rows]="3">
+          </sa-textarea>
+          <small><strong>Valor:</strong> {{ valorObservaciones }}</small>
+        </div>
+
+        <div class="col-md-4">
+          <sa-textarea
+            label="Valores numéricos"
+            placeholder="0.00"
+            formControlName="valorNumerico"
+            [saNumbersOnly]="true"
+            [allowDecimals]="true"
+            [allowNegative]="true"
+            [maxDecimals]="2"
+            helperText="Permite decimales y negativos"
+            [rows]="3">
+          </sa-textarea>
+          <small><strong>Valor:</strong> {{ valorNumerico }}</small>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <p><strong>Datos completos:</strong></p>
+        <pre>{{ formComentarios.value | json }}</pre>
+      </div>
+    </form>
+  </div>
+
+</section>

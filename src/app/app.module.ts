@@ -1,16 +1,54 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+//Sanna UI
+import { SannaUiModule } from 'sanna-ui';
+import { MenuComponent } from './shared';
+
+
+
+
+import { BotonComponent } from './components/boton/boton.component';
+import { InputComponent } from './components/input/input.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
+import { SelectComponent } from './components/select/select.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { SwitchComponent } from './components/switch/switch.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { IconComponent } from './components/icon/icon.component';
+import { LegendComponent } from './components/legend/legend.component';
+import { TagComponent } from './components/tag/tag.component';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    InputComponent,
+    BotonComponent,
+    SelectComponent,
+    TextareaComponent,
+    CheckboxComponent,
+    RadioComponent,
+    SwitchComponent,
+    CalendarComponent,
+    IconComponent,
+    LegendComponent,
+    TagComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SannaUiModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
