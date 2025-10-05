@@ -10,28 +10,48 @@ export class SwitchComponent implements OnInit {
   // Formulario reactivo para el ejemplo completo
   formCompleto!: FormGroup;
 
-  // Formulario reactivo para el ejemplo práctico
-  formConfiguracion!: FormGroup;
-
   // Variables para controles
   isDisabled: boolean = false;
-  isRequired: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo
+    // Inicializar formulario completo (sin required por defecto)
     this.formCompleto = this.fb.group({
-      switchCompleto: [false, Validators.requiredTrue]
+      switchCompleto: [false]
     });
+  }
 
-    // Inicializar formulario de configuración
-    this.formConfiguracion = this.fb.group({
-      notificaciones: [true],
-      modoOscuro: [false],
-      emailsMarketing: [false],
-      sincronizacionAutomatica: [true]
-    });
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('switchCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.requiredTrue]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get switchStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('switchCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
   }
 
   // Métodos para manejar eventos
@@ -51,34 +71,8 @@ export class SwitchComponent implements OnInit {
     console.log('Switch desenfocado:', event);
   }
 
-  // Getters para acceder fácilmente a los valores
+  // Getter para acceder fácilmente al valor
   get valorSwitchCompleto(): boolean {
     return this.formCompleto.get('switchCompleto')?.value || false;
-  }
-
-  get valorNotificaciones(): boolean {
-    return this.formConfiguracion.get('notificaciones')?.value || false;
-  }
-
-  get valorModoOscuro(): boolean {
-    return this.formConfiguracion.get('modoOscuro')?.value || false;
-  }
-
-  get valorEmailsMarketing(): boolean {
-    return this.formConfiguracion.get('emailsMarketing')?.value || false;
-  }
-
-  get valorSincronizacion(): boolean {
-    return this.formConfiguracion.get('sincronizacionAutomatica')?.value || false;
-  }
-
-  get valoresConfiguracion(): any {
-    return this.formConfiguracion.value;
-  }
-
-  // Contar switches activados
-  get cantidadActivados(): number {
-    const valores = this.formConfiguracion.value;
-    return Object.values(valores).filter(v => v === true).length;
   }
 }

@@ -10,29 +10,48 @@ export class CheckboxComponent implements OnInit {
   // Formulario reactivo para el ejemplo completo
   formCompleto!: FormGroup;
 
-  // Formulario reactivo para el ejemplo de grupo
-  formGrupo!: FormGroup;
-
   // Variables para controles
   isDisabled: boolean = false;
-  isRequired: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo
+    // Inicializar formulario completo (sin required por defecto)
     this.formCompleto = this.fb.group({
-      checkboxCompleto: [false, Validators.requiredTrue]
+      checkboxCompleto: [false]
     });
+  }
 
-    // Inicializar formulario de grupo
-    this.formGrupo = this.fb.group({
-      deportes: [false],
-      tecnologia: [false],
-      musica: [false],
-      arte: [false],
-      notificaciones: [false]
-    });
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('checkboxCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.requiredTrue]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get checkboxStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('checkboxCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
   }
 
   // Métodos para manejar eventos
@@ -53,18 +72,8 @@ export class CheckboxComponent implements OnInit {
     console.log('Checkbox desenfocado:', event);
   }
 
-  // Getters para acceder fácilmente a los valores
+  // Getter para acceder fácilmente al valor
   get valorCheckboxCompleto(): boolean {
     return this.formCompleto.get('checkboxCompleto')?.value || false;
-  }
-
-  get valoresGrupo(): any {
-    return this.formGrupo.value;
-  }
-
-  // Contar seleccionados en el grupo
-  get cantidadSeleccionados(): number {
-    const valores = this.formGrupo.value;
-    return Object.values(valores).filter(v => v === true).length;
   }
 }

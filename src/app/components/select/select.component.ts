@@ -29,15 +29,46 @@ export class SelectComponent implements OnInit {
   // Variables para el ejemplo dinámico
   valorSeleccionado: string = '';
   isDisabled: boolean = false;
-  isRequired: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo
+    // Inicializar formulario completo (sin required por defecto)
     this.formCompleto = this.fb.group({
-      selectCompleto: ['', Validators.required]
+      selectCompleto: ['']
     });
+  }
+
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('selectCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get selectStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('selectCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
   }
 
   // Método para manejar el cambio de valor

@@ -24,6 +24,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LegendComponent } from './components/legend/legend.component';
 import { TagComponent } from './components/tag/tag.component';
+import { TableServerComponent } from './components/table-server/table-server.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { TagComponent } from './components/tag/tag.component';
     IconComponent,
     LegendComponent,
     TagComponent,
+    TableServerComponent,
   ],
   imports: [
     BrowserModule,

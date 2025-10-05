@@ -10,27 +10,48 @@ export class RadioComponent implements OnInit {
   // Formulario reactivo para el ejemplo completo
   formCompleto!: FormGroup;
 
-  // Formulario reactivo para múltiples grupos
-  formMultiple!: FormGroup;
-
   // Variables para controles
   isDisabled: boolean = false;
-  isRequired: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo
+    // Inicializar formulario completo (sin required por defecto)
     this.formCompleto = this.fb.group({
-      radioCompleto: ['', Validators.required]
+      radioCompleto: ['']
     });
+  }
 
-    // Inicializar formulario con múltiples grupos
-    this.formMultiple = this.fb.group({
-      metodoPago: ['', Validators.required],
-      tipoEnvio: [''],
-      plan: ['']
-    });
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('radioCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get radioStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('radioCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
   }
 
   // Métodos para manejar eventos
@@ -51,24 +72,8 @@ export class RadioComponent implements OnInit {
     console.log('Radio desenfocado:', event);
   }
 
-  // Getters para acceder fácilmente a los valores
+  // Getter para acceder fácilmente al valor
   get valorRadioCompleto(): any {
     return this.formCompleto.get('radioCompleto')?.value || 'Ninguno';
-  }
-
-  get valorMetodoPago(): any {
-    return this.formMultiple.get('metodoPago')?.value || 'No seleccionado';
-  }
-
-  get valorTipoEnvio(): any {
-    return this.formMultiple.get('tipoEnvio')?.value || 'No seleccionado';
-  }
-
-  get valorPlan(): any {
-    return this.formMultiple.get('plan')?.value || 'No seleccionado';
-  }
-
-  get valoresMultiple(): any {
-    return this.formMultiple.value;
   }
 }

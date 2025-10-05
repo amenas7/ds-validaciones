@@ -10,20 +10,23 @@ export class CalendarComponent implements OnInit {
   // Formulario reactivo para el ejemplo completo
   formCompleto!: FormGroup;
 
-  // Formulario reactivo para el ejemplo práctico
-  formReserva!: FormGroup;
-
   // Variables para controles
   isDisabled: boolean = false;
-  isRequired: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
 
   // Fechas para ejemplos
   today = new Date();
   tomorrow: Date;
   yesterday: Date;
   maxDate30Days: Date;
-  minDateReserva: Date;
-  maxDateReserva: Date;
 
   constructor(private fb: FormBuilder) {
     // Inicializar fechas
@@ -35,26 +38,36 @@ export class CalendarComponent implements OnInit {
 
     this.maxDate30Days = new Date();
     this.maxDate30Days.setDate(this.today.getDate() + 30);
-
-    this.minDateReserva = new Date();
-    this.minDateReserva.setDate(this.today.getDate() + 1);
-
-    this.maxDateReserva = new Date();
-    this.maxDateReserva.setMonth(this.today.getMonth() + 3);
   }
 
   ngOnInit(): void {
-    // Inicializar formulario completo
+    // Inicializar formulario completo (sin required por defecto)
     this.formCompleto = this.fb.group({
-      calendarCompleto: [null, Validators.required]
+      calendarCompleto: [null]
     });
+  }
 
-    // Inicializar formulario de reserva
-    this.formReserva = this.fb.group({
-      fechaEntrada: [null, Validators.required],
-      fechaSalida: [null, Validators.required],
-      fechaNacimiento: [null]
-    });
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('calendarCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get calendarStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('calendarCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
   }
 
   // Métodos para manejar eventos
@@ -86,28 +99,9 @@ export class CalendarComponent implements OnInit {
     console.log('Valor cambiado:', value);
   }
 
-  // Getters para acceder fácilmente a los valores
+  // Getter para acceder fácilmente al valor
   get valorCalendarCompleto(): any {
     const value = this.formCompleto.get('calendarCompleto')?.value;
     return value ? value : 'Ninguna';
-  }
-
-  get valorFechaEntrada(): any {
-    const value = this.formReserva.get('fechaEntrada')?.value;
-    return value ? value : 'No seleccionada';
-  }
-
-  get valorFechaSalida(): any {
-    const value = this.formReserva.get('fechaSalida')?.value;
-    return value ? value : 'No seleccionada';
-  }
-
-  get valorFechaNacimiento(): any {
-    const value = this.formReserva.get('fechaNacimiento')?.value;
-    return value ? value : 'No seleccionada';
-  }
-
-  get valoresReserva(): any {
-    return this.formReserva.value;
   }
 }

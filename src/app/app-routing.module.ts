@@ -13,6 +13,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LegendComponent } from './components/legend/legend.component';
 import { TagComponent } from './components/tag/tag.component';
+import { TableServerComponent } from './components/table-server/table-server.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/boton', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'icon', component: IconComponent },
   { path: 'legend', component: LegendComponent },
   { path: 'tag', component: TagComponent },
+  { path: 'table-server', component: TableServerComponent },
 ];
 
 @NgModule({

@@ -1,316 +1,95 @@
 <section class="p-4">
-  <h1 class="mb-4">Ejemplos del Componente sa-radio</h1>
-
-  <!-- ========== EJEMPLOS BÁSICOS ========== -->
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES Y VALIDACIÓN DINÁMICA ========== -->
   <div class="mb-5">
-    <h2 class="mb-3">Ejemplos Básicos</h2>
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades y Validación Dinámica (Formulario Reactivo)</h2>
     <div class="row g-3">
-      <div class="col-md-6">
-        <h5 class="mb-3">Grupo de opciones básico</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción 1" value="option1" name="basicGroup"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción 2" value="option2" name="basicGroup"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción 3" value="option3" name="basicGroup"></sa-radio>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <h5 class="mb-3">Con texto de ayuda</h5>
-        <div class="mb-2">
-          <sa-radio
-            label="Email"
-            value="email"
-            name="notificationGroup"
-            helperText="Recibirás notificaciones por correo">
-          </sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio
-            label="SMS"
-            value="sms"
-            name="notificationGroup"
-            helperText="Recibirás mensajes de texto">
-          </sa-radio>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== ESTADOS ========== -->
-  <div class="mb-5">
-    <h2 class="mb-3">Estados</h2>
-    <div class="row g-3">
-      <div class="col-md-6">
-        <h5 class="mb-3">Campo requerido</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción requerida 1" value="req1" name="requiredGroup" [required]="true"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción requerida 2" value="req2" name="requiredGroup" [required]="true"></sa-radio>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <h5 class="mb-3">Deshabilitado</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción normal" value="normal" name="disabledGroup"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción deshabilitada" value="disabled" name="disabledGroup" [disabled]="true"></sa-radio>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <h5 class="mb-3">Con success</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción correcta" value="success1" name="successGroup" status="success"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Otra opción" value="success2" name="successGroup" status="success"></sa-radio>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <h5 class="mb-3">Con error</h5>
-        <div class="mb-2">
-          <sa-radio
-            label="Opción con error"
-            value="error1"
-            name="errorGroup"
-            status="error"
-            errorText="Debe seleccionar una opción válida">
-          </sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Otra opción" value="error2" name="errorGroup" status="error"></sa-radio>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== TAMAÑOS ========== -->
-  <div class="mb-5">
-    <h2 class="mb-3">Tamaños (size)</h2>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <h5>Small</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción 1" value="sm1" name="sizeSmall" size="sm"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción 2" value="sm2" name="sizeSmall" size="sm"></sa-radio>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h5>Medium</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción 1" value="md1" name="sizeMedium" size="md"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción 2" value="md2" name="sizeMedium" size="md"></sa-radio>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h5>Large</h5>
-        <div class="mb-2">
-          <sa-radio label="Opción 1" value="lg1" name="sizeLarge" size="lg"></sa-radio>
-        </div>
-        <div class="mb-2">
-          <sa-radio label="Opción 2" value="lg2" name="sizeLarge" size="lg"></sa-radio>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES ========== -->
-  <div class="mb-5">
-    <h2 class="mb-3">Ejemplo con Todas las Propiedades (Formulario Reactivo)</h2>
-    <div class="row g-3">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <form [formGroup]="formCompleto">
-          <h5 class="mb-3">Selecciona una opción</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <sa-radio-group
+                label="Selecciona el plan"
+                formControlName="radioCompleto"
+                size="lg"
+                [status]="radioStatus"
+                [required]="isRequired"
+                [disabled]="isDisabled"
+                [errorText]="
+                  formCompleto.get('radioCompleto')?.hasError('required') && formCompleto.get('radioCompleto')?.touched
+                    ? 'Debe seleccionar un plan'
+                    : ''
+                "
+                helperText="Este radio group tiene todas las propiedades configuradas con status dinámico">
 
-          <div class="mb-2">
-            <sa-radio
-              label="Opción Premium"
-              formControlName="radioCompleto"
-              value="premium"
-              size="lg"
-              status="default"
-              helperText="Incluye todas las características avanzadas"
-              id="radio-premium"
-              name="radioCompleto"
-              [required]="isRequired"
-              [disabled]="isDisabled"
-              (valueChange)="onValueChange($event)"
-              (change)="onChange($event)"
-              (focusin)="onFocus($event)"
-              (focusout)="onBlur($event)">
-            </sa-radio>
+                <sa-radio
+                  value="premium"
+                  label="Premium"
+                  helperText="Incluye todas las características avanzadas"
+                  (valueChange)="onValueChange($event)"
+                  (change)="onChange($event)"
+                  (focusin)="onFocus($event)"
+                  (focusout)="onBlur($event)">
+                </sa-radio>
+
+                <sa-radio
+                  value="standard"
+                  label="Estándar"
+                  helperText="Características básicas incluidas">
+                </sa-radio>
+
+                <sa-radio
+                  value="free"
+                  label="Gratuita"
+                  helperText="Funciones limitadas">
+                </sa-radio>
+
+              </sa-radio-group>
+            </div>
+            <div class="col-md-6">
+              <div class="mt-4">
+                <p><strong>Estado del campo:</strong></p>
+                <ul class="small">
+                  <li>Valor: {{ formCompleto.get('radioCompleto')?.value || 'vacío' }}</li>
+                  <li>Valid: {{ formCompleto.get('radioCompleto')?.valid }}</li>
+                  <li>Touched: {{ formCompleto.get('radioCompleto')?.touched }}</li>
+                  <li>Status mostrado:
+                    <sa-tag
+                      [text]="radioStatus"
+                      [type]="
+                        radioStatus === 'error'
+                          ? 'danger'
+                          : radioStatus === 'success'
+                          ? 'success'
+                          : 'secondary'
+                      "
+                      size="small">
+                    </sa-tag>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div class="mb-2">
-            <sa-radio
-              label="Opción Estándar"
-              formControlName="radioCompleto"
-              value="standard"
-              size="lg"
-              name="radioCompleto"
-              helperText="Características básicas incluidas"
-              (valueChange)="onValueChange($event)"
-              (change)="onChange($event)"
-              [required]="isRequired"
-              [disabled]="isDisabled">
-            </sa-radio>
+          <div class="row g-3 mt-2">
+            <div class="col-md-12">
+              <p><strong>Opción seleccionada:</strong> {{ valorRadioCompleto }}</p>
+              <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+            </div>
           </div>
 
-          <div class="mb-2">
-            <sa-radio
-              label="Opción Gratuita"
-              formControlName="radioCompleto"
-              value="free"
-              size="lg"
-              name="radioCompleto"
-              helperText="Funciones limitadas"
-              (valueChange)="onValueChange($event)"
-              (change)="onChange($event)"
-              [required]="isRequired"
-              [disabled]="isDisabled">
-            </sa-radio>
+          <div class="row g-3 mt-2">
+            <div class="col-md-12">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+                Toggle Required ({{ isRequired }})
+              </button>
+              <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+                Toggle Disabled ({{ isDisabled }})
+              </button>
+            </div>
           </div>
         </form>
-
-        <div class="mt-3">
-          <p><strong>Opción seleccionada:</strong> {{ valorRadioCompleto }}</p>
-          <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
-        </div>
-
-        <div class="mt-3">
-          <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
-            Toggle Required ({{ isRequired }})
-          </button>
-          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
-            Toggle Disabled ({{ isDisabled }})
-          </button>
-        </div>
       </div>
     </div>
-  </div>
-
-  <!-- ========== EJEMPLO PRÁCTICO: MÚLTIPLES GRUPOS ========== -->
-  <div class="mb-5">
-    <h2 class="mb-3">Ejemplo Práctico: Múltiples Grupos (Formulario Reactivo)</h2>
-    <form [formGroup]="formMultiple">
-      <div class="row g-4">
-        <!-- Grupo 1: Método de pago -->
-        <div class="col-md-4">
-          <h4 class="mb-3">Método de pago</h4>
-          <div class="mb-2">
-            <sa-radio
-              label="Tarjeta de crédito"
-              formControlName="metodoPago"
-              value="credit"
-              name="metodoPago"
-              helperText="Visa, Mastercard, Amex">
-            </sa-radio>
-          </div>
-          <div class="mb-2">
-            <sa-radio
-              label="PayPal"
-              formControlName="metodoPago"
-              value="paypal"
-              name="metodoPago"
-              helperText="Pago seguro con PayPal">
-            </sa-radio>
-          </div>
-          <div class="mb-2">
-            <sa-radio
-              label="Transferencia"
-              formControlName="metodoPago"
-              value="transfer"
-              name="metodoPago"
-              helperText="Transferencia bancaria">
-            </sa-radio>
-          </div>
-          <small class="d-block mt-2"><strong>Selección:</strong> {{ valorMetodoPago }}</small>
-        </div>
-
-        <!-- Grupo 2: Tipo de envío -->
-        <div class="col-md-4">
-          <h4 class="mb-3">Tipo de envío</h4>
-          <div class="mb-2">
-            <sa-radio
-              label="Estándar"
-              formControlName="tipoEnvio"
-              value="standard"
-              name="tipoEnvio"
-              helperText="5-7 días hábiles">
-            </sa-radio>
-          </div>
-          <div class="mb-2">
-            <sa-radio
-              label="Express"
-              formControlName="tipoEnvio"
-              value="express"
-              name="tipoEnvio"
-              helperText="2-3 días hábiles">
-            </sa-radio>
-          </div>
-          <div class="mb-2">
-            <sa-radio
-              label="Inmediato"
-              formControlName="tipoEnvio"
-              value="immediate"
-              name="tipoEnvio"
-              helperText="Entrega el mismo día">
-            </sa-radio>
-          </div>
-          <small class="d-block mt-2"><strong>Selección:</strong> {{ valorTipoEnvio }}</small>
-        </div>
-
-        <!-- Grupo 3: Plan de suscripción -->
-        <div class="col-md-4">
-          <h4 class="mb-3">Plan de suscripción</h4>
-          <div class="mb-2">
-            <sa-radio
-              label="Mensual"
-              formControlName="plan"
-              value="monthly"
-              name="plan"
-              helperText="$9.99/mes">
-            </sa-radio>
-          </div>
-          <div class="mb-2">
-            <sa-radio
-              label="Trimestral"
-              formControlName="plan"
-              value="quarterly"
-              name="plan"
-              helperText="$24.99/3 meses">
-            </sa-radio>
-          </div>
-          <div class="mb-2">
-            <sa-radio
-              label="Anual"
-              formControlName="plan"
-              value="yearly"
-              name="plan"
-              helperText="$89.99/año">
-            </sa-radio>
-          </div>
-          <small class="d-block mt-2"><strong>Selección:</strong> {{ valorPlan }}</small>
-        </div>
-      </div>
-
-      <div class="mt-4">
-        <p><strong>Todas las selecciones:</strong></p>
-        <pre>{{ valoresMultiple | json }}</pre>
-      </div>
-    </form>
   </div>
 
 </section>

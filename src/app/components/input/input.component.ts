@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './input.component.scss'
 })
 export class InputComponent implements OnInit {
-  // Formulario reactivo para el ejemplo completo
+  // Formulario reactivo para el ejemplo
   formCompleto!: FormGroup;
 
   // Formulario reactivo para el ejemplo práctico
@@ -15,22 +15,53 @@ export class InputComponent implements OnInit {
 
   // Variables para controles
   isDisabled: boolean = false;
-  isRequired: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo
+    // Inicializar formulario
     this.formCompleto = this.fb.group({
       inputCompleto: ['', [Validators.minLength(3), Validators.maxLength(50)]]
     });
 
     // Inicializar formulario de producto
-    this.formProducto = this.fb.group({
-      codigoProducto: [''],
-      precio: [''],
-      nombreProducto: ['']
-    });
+    // this.formProducto = this.fb.group({
+    //   codigoProducto: [''],
+    //   precio: [''],
+    //   nombreProducto: ['']
+    // });
+  }
+
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('inputCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(50)]);
+    } else {
+      control?.setValidators([Validators.minLength(3), Validators.maxLength(50)]);
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get inputStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('inputCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
   }
 
   // Métodos para manejar eventos
@@ -62,15 +93,15 @@ export class InputComponent implements OnInit {
     return this.formCompleto.get('inputCompleto')?.value || 'Ninguno';
   }
 
-  get valorCodigoProducto(): string {
-    return this.formProducto.get('codigoProducto')?.value || 'vacío';
-  }
+  // get valorCodigoProducto(): string {
+  //   return this.formProducto.get('codigoProducto')?.value || 'vacío';
+  // }
 
-  get valorPrecio(): string {
-    return this.formProducto.get('precio')?.value || 'vacío';
-  }
+  // get valorPrecio(): string {
+  //   return this.formProducto.get('precio')?.value || 'vacío';
+  // }
 
-  get valorNombreProducto(): string {
-    return this.formProducto.get('nombreProducto')?.value || 'vacío';
-  }
+  // get valorNombreProducto(): string {
+  //   return this.formProducto.get('nombreProducto')?.value || 'vacío';
+  // }
 }
