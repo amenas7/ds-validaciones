@@ -1,1 +1,127 @@
-<p>table-server works!</p>
+<section class="p-4">
+  <h1 class="mb-4">Gestión de Servicios de Laboratorio con API REST</h1>
+
+  <!-- ========== FILTROS ========== -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <form [formGroup]="filtroForm">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <sa-calendar
+              label="Fecha Inicio"
+              formControlName="fecha_ini"
+              size="sm">
+            </sa-calendar>
+          </div>
+
+          <div class="col-md-3">
+            <sa-calendar
+              label="Fecha Fin"
+              formControlName="fecha_fin"
+              size="sm">
+            </sa-calendar>
+          </div>
+
+          <div class="col-md-3">
+            <sa-select
+              label="Estado"
+              formControlName="estado"
+              placeholder="Todos"
+              size="sm"
+              [options]="estadoOptions">
+            </sa-select>
+          </div>
+
+          <div class="col-md-3">
+            <sa-select
+              label="Clasificación"
+              formControlName="clasificacion"
+              placeholder="Todas"
+              size="sm"
+              [options]="clasificacionOptions">
+            </sa-select>
+          </div>
+
+          <div class="col-12">
+            <sa-button
+              label="Buscar"
+              variant="primary"
+              icon="search"
+              position="right"
+              size="sm"
+              (clicked)="buscar()">
+            </sa-button>
+            <sa-button
+              label="Limpiar"
+              variant="secondary"
+              size="sm"
+              class="ms-2"
+              (clicked)="limpiarFiltros()">
+            </sa-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== TABLA CON PAGINACIÓN DEL SERVIDOR ========== -->
+  <div class="card">
+    <div class="card-body">
+      <sa-table-server
+        [columns]="columns"
+        [data]="currentPageData"
+        [paginationData]="paginationData"
+        [paginationOptions]="paginationOptions"
+        [loading]="isLoading"
+        [emptyMessage]="'No se encontraron registros'"
+        [showFirstLastButtons]="true"
+        minWidth="1400px"
+        (loadData)="onLoadData($event)"
+        (rowClick)="onRowClick($event)"
+        (rowDoubleClick)="onRowDoubleClick($event)">
+      </sa-table-server>
+    </div>
+  </div>
+
+  <!-- ========== INFORMACIÓN DE LA FILA SELECCIONADA ========== -->
+  <div class="card mt-3" *ngIf="selectedRow">
+    <div class="card-header">
+      <strong>Detalle de la fila seleccionada</strong>
+    </div>
+    <div class="card-body">
+      <pre>{{ selectedRow | json }}</pre>
+    </div>
+  </div>
+
+  <!-- ========== INFORMACIÓN DE ESTADO ========== -->
+  <div class="card mt-3">
+    <div class="card-header">
+      <strong>Estado de la tabla</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <p class="mb-1"><strong>Página actual:</strong> {{ paginationData.currentPage }}</p>
+          <p class="mb-1"><strong>Items por página:</strong> {{ paginationData.itemsPerPage }}</p>
+        </div>
+        <div class="col-md-3">
+          <p class="mb-1"><strong>Total de items:</strong> {{ paginationData.totalItems }}</p>
+          <p class="mb-1"><strong>Items en página actual:</strong> {{ paginationData.currentItemsCount }}</p>
+        </div>
+        <div class="col-md-3">
+          <p class="mb-1"><strong>Total de páginas:</strong> {{ totalPages }}</p>
+          <p class="mb-1"><strong>Cargando:</strong> {{ isLoading ? 'Sí' : 'No' }}</p>
+        </div>
+        <div class="col-md-3">
+          <p class="mb-1"><strong>Filtros activos:</strong></p>
+          <ul class="small mb-0">
+            <li *ngIf="filtroForm.get('fecha_ini')?.value">Fecha Inicio: {{ filtroForm.get('fecha_ini')?.value }}</li>
+            <li *ngIf="filtroForm.get('fecha_fin')?.value">Fecha Fin: {{ filtroForm.get('fecha_fin')?.value }}</li>
+            <li *ngIf="filtroForm.get('estado')?.value">Estado: {{ filtroForm.get('estado')?.value }}</li>
+            <li *ngIf="filtroForm.get('clasificacion')?.value">Clasificación: {{ filtroForm.get('clasificacion')?.value }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
