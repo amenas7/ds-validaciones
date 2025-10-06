@@ -7,44 +7,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './radio.component.scss'
 })
 export class RadioComponent implements OnInit {
-  // Formulario reactivo para el ejemplo completo
-  formCompleto!: FormGroup;
+  // Formulario para el ejemplo con radios individuales
+  formRadioIndividual!: FormGroup;
 
   // Variables para controles
   isDisabled: boolean = false;
 
-  private _isRequired: boolean = false;
-  get isRequired(): boolean {
-    return this._isRequired;
-  }
-  set isRequired(value: boolean) {
-    this._isRequired = value;
-    this.updateValidators();
-  }
-
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo (sin required por defecto)
-    this.formCompleto = this.fb.group({
-      radioCompleto: ['']
+    // Inicializar formulario para radios individuales (sin required por defecto)
+    this.formRadioIndividual = this.fb.group({
+      planSeleccionado: ['']
     });
-  }
-
-  // Método para actualizar validadores cuando cambia isRequired
-  private updateValidators(): void {
-    const control = this.formCompleto.get('radioCompleto');
-    if (this._isRequired) {
-      control?.setValidators([Validators.required]);
-    } else {
-      control?.clearValidators();
-    }
-    control?.updateValueAndValidity({ emitEvent: false });
   }
 
   // Getter para calcular el status dinámicamente
   get radioStatus(): 'default' | 'success' | 'error' {
-    const control = this.formCompleto.get('radioCompleto');
+    const control = this.formRadioIndividual.get('planSeleccionado');
     if (control?.invalid && control?.touched) {
       return 'error';
     }
@@ -72,8 +52,14 @@ export class RadioComponent implements OnInit {
     console.log('Radio desenfocado:', event);
   }
 
-  // Getter para acceder fácilmente al valor
-  get valorRadioCompleto(): any {
-    return this.formCompleto.get('radioCompleto')?.value || 'Ninguno';
+  // Getter para mostrar el texto del plan seleccionado
+  get planSeleccionadoTexto(): string {
+    const plan = this.formRadioIndividual.get('planSeleccionado')?.value;
+    if (plan === 'basic') {
+      return 'Plan Básico - $9.99/mes (10GB de almacenamiento)';
+    } else if (plan === 'pro') {
+      return 'Plan Pro - $29.99/mes (100GB y soporte prioritario)';
+    }
+    return 'Ningún plan seleccionado';
   }
 }

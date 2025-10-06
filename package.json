@@ -21,7 +21,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10",
-    "sanna-ui": "git+https://github.com/amenas7/amena-ui.git#v0.0.143"
+    "sanna-ui": "git+https://github.com/amenas7/amena-ui.git#v0.0.145"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "18.2.13",

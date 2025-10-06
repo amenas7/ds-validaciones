@@ -1,95 +1,99 @@
 <section class="p-4">
-  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES Y VALIDACIÓN DINÁMICA ========== -->
+  <!-- ========== EJEMPLO CON SA-RADIO INDIVIDUAL (SIN SA-RADIO-GROUP) ========== -->
   <div class="mb-5">
-    <h2 class="mb-3">Ejemplo con Todas las Propiedades y Validación Dinámica (Formulario Reactivo)</h2>
-    <div class="row g-3">
-      <div class="col-md-12">
-        <form [formGroup]="formCompleto">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <sa-radio-group
-                label="Selecciona el plan"
-                formControlName="radioCompleto"
-                size="lg"
-                [status]="radioStatus"
-                [required]="isRequired"
-                [disabled]="isDisabled"
-                [errorText]="
-                  formCompleto.get('radioCompleto')?.hasError('required') && formCompleto.get('radioCompleto')?.touched
-                    ? 'Debe seleccionar un plan'
-                    : ''
-                "
-                helperText="Este radio group tiene todas las propiedades configuradas con status dinámico">
+    <h2 class="mb-3">Ejemplo con sa-radio Individual (Sin sa-radio-group)</h2>
+    <p class="text-muted mb-3">
+      Usa <code>sa-radio</code> individual cuando cada opción necesite su propio label, helper text y estilos personalizados.
+      Recuerda usar el mismo <code>name</code> para agruparlos lógicamente.
+    </p>
 
-                <sa-radio
-                  value="premium"
-                  label="Premium"
-                  helperText="Incluye todas las características avanzadas"
-                  (valueChange)="onValueChange($event)"
-                  (change)="onChange($event)"
-                  (focusin)="onFocus($event)"
-                  (focusout)="onBlur($event)">
-                </sa-radio>
+    <form [formGroup]="formRadioIndividual">
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="d-flex gap-4 align-items-start">
+            <sa-radio
+              name="plan"
+              value="basic"
+              formControlName="planSeleccionado"
+              label="Plan Básico - $9.99/mes"
+              helperText="Ideal para uso personal. Incluye 10GB de almacenamiento"
+              size="md"
+              [status]="radioStatus"
+              [disabled]="isDisabled"
+              [errorText]="
+                formRadioIndividual.get('planSeleccionado')?.hasError('required') && formRadioIndividual.get('planSeleccionado')?.touched
+                  ? 'Debe seleccionar un plan'
+                  : ''
+              "
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)"
+              (focusin)="onFocus($event)"
+              (focusout)="onBlur($event)">
+            </sa-radio>
 
-                <sa-radio
-                  value="standard"
-                  label="Estándar"
-                  helperText="Características básicas incluidas">
-                </sa-radio>
-
-                <sa-radio
-                  value="free"
-                  label="Gratuita"
-                  helperText="Funciones limitadas">
-                </sa-radio>
-
-              </sa-radio-group>
-            </div>
-            <div class="col-md-6">
-              <div class="mt-4">
-                <p><strong>Estado del campo:</strong></p>
-                <ul class="small">
-                  <li>Valor: {{ formCompleto.get('radioCompleto')?.value || 'vacío' }}</li>
-                  <li>Valid: {{ formCompleto.get('radioCompleto')?.valid }}</li>
-                  <li>Touched: {{ formCompleto.get('radioCompleto')?.touched }}</li>
-                  <li>Status mostrado:
-                    <sa-tag
-                      [text]="radioStatus"
-                      [type]="
-                        radioStatus === 'error'
-                          ? 'danger'
-                          : radioStatus === 'success'
-                          ? 'success'
-                          : 'secondary'
-                      "
-                      size="small">
-                    </sa-tag>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <sa-radio
+              name="plan"
+              value="pro"
+              formControlName="planSeleccionado"
+              label="Plan Pro - $29.99/mes"
+              helperText="Para profesionales. Incluye 100GB y soporte prioritario"
+              size="md"
+              [status]="radioStatus"
+              [disabled]="isDisabled"
+              [errorText]="
+                formRadioIndividual.get('planSeleccionado')?.hasError('required') && formRadioIndividual.get('planSeleccionado')?.touched
+                  ? 'Debe seleccionar un plan'
+                  : ''
+              "
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)"
+              (focusin)="onFocus($event)"
+              (focusout)="onBlur($event)">
+            </sa-radio>
           </div>
+        </div>
 
-          <div class="row g-3 mt-2">
-            <div class="col-md-12">
-              <p><strong>Opción seleccionada:</strong> {{ valorRadioCompleto }}</p>
-              <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
-            </div>
+        <div class="col-md-4">
+          <div class="mt-2">
+            <p><strong>Estado del campo:</strong></p>
+            <ul class="small">
+              <li>Valor: {{ formRadioIndividual.get('planSeleccionado')?.value || 'vacío' }}</li>
+              <li>Valid: {{ formRadioIndividual.get('planSeleccionado')?.valid }}</li>
+              <li>Touched: {{ formRadioIndividual.get('planSeleccionado')?.touched }}</li>
+              <li>Status:
+                <sa-tag
+                  [text]="radioStatus"
+                  [type]="
+                    radioStatus === 'error'
+                      ? 'danger'
+                      : radioStatus === 'success'
+                      ? 'success'
+                      : 'secondary'
+                  "
+                  size="small">
+                </sa-tag>
+              </li>
+            </ul>
           </div>
-
-          <div class="row g-3 mt-2">
-            <div class="col-md-12">
-              <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
-                Toggle Required ({{ isRequired }})
-              </button>
-              <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
-                Toggle Disabled ({{ isDisabled }})
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
+
+      <div class="row g-3 mt-2">
+        <div class="col-md-12">
+          <div class="alert alert-info">
+            <strong>Plan seleccionado:</strong> {{ planSeleccionadoTexto }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-2">
+        <div class="col-md-12">
+          <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+            Toggle Disabled ({{ isDisabled }})
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 
 </section>
