@@ -1,12 +1,41 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Icon/Icon Example" />
+
+# 📚 Code Example - sa-icon
+
+### HTML Template
+```html
+<sa-icon
+  [name]="iconName"
+  [color]="iconColor"
+  [size]="iconSize">
+</sa-icon>
+
+<div class="mt-4">
+  <button class="btn btn-sm btn-outline-primary me-2" (click)="changeIcon()">
+    Cambiar Icono ({{ iconName }})
+  </button>
+  <button class="btn btn-sm btn-outline-info me-2" (click)="changeColor()">
+    Cambiar Color ({{ iconColor }})
+  </button>
+  <button class="btn btn-sm btn-outline-success" (click)="changeSize()">
+    Cambiar Tamaño ({{ iconSize }})
+  </button>
+</div>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-icon',
-  templateUrl: './icon.component.html',
-  styleUrl: './icon.component.scss'
+  ......
 })
-export class IconComponent {
-  // Propiedades dinámicas para el ejemplo
+
+export class ........ {
+// Propiedades dinámicas para el ejemplo
   iconName: string = 'heart';
   iconColor: string = '#ff0000';
   iconSize: 'sm' | 'md' | 'lg' = 'md';
@@ -36,3 +65,4 @@ export class IconComponent {
     this.iconSize = this.iconSizes[this.currentSizeIndex];
   }
 }
+```

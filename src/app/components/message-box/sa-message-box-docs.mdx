@@ -1,0 +1,113 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Message-box/Message-box Example" />
+
+# 📚 Code Example - sa-Message-box
+
+### HTML Template
+```html
+<sa-messagebox
+  [message]="message"
+  [type]="messageType"
+  [iconName]="iconName"
+  [iconSize]="iconSize"
+  [iconColor]="iconColor"
+  [class]="customClass">
+</sa-messagebox>
+
+<div class="mt-4">
+  <button class="btn btn-sm btn-outline-primary me-2" (click)="changeType()">
+    Cambiar Tipo ({{ messageType }})
+  </button>
+  <button class="btn btn-sm btn-outline-info me-2" (click)="changeMessage()">
+    Cambiar Mensaje
+  </button>
+  <button class="btn btn-sm btn-outline-success me-2" (click)="changeIcon()">
+    Cambiar Icono ({{ iconName }})
+  </button>
+  <button class="btn btn-sm btn-outline-warning me-2" (click)="changeIconSize()">
+    Cambiar Tamaño Icono ({{ iconSize }})
+  </button>
+  <button class="btn btn-sm btn-outline-danger me-2" (click)="changeIconColor()">
+    Cambiar Color Icono
+  </button>
+</div>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  ......
+})
+
+export class ........ {
+// Propiedades dinámicas para el ejemplo
+  message: string = 'Este es un mensaje de éxito con todas las propiedades configurables';
+  messageType: 'success' | 'warning' | 'error' | 'info' = 'success';
+  iconName: string = 'check-circle';
+  iconSize: 'sm' | 'md' | 'lg' = 'md';
+  iconColor: string = '#28a745';
+  customClass: string = '';
+
+  // Arrays para rotación de valores
+  private types: ('success' | 'warning' | 'error' | 'info')[] = ['success', 'warning', 'error', 'info'];
+  private messages: { [key: string]: string } = {
+    'success': 'Este es un mensaje de éxito con todas las propiedades configurables',
+    'warning': 'Este es un mensaje de advertencia, ten cuidado con esta acción',
+    'error': 'Ha ocurrido un error, por favor revisa la información ingresada',
+    'info': 'Este es un mensaje informativo para el usuario'
+  };
+  private icons: { [key: string]: string } = {
+    'success': 'check-circle',
+    'warning': 'exclamation-triangle',
+    'error': 'times-circle',
+    'info': 'info-circle'
+  };
+  private iconNames: string[] = ['check-circle', 'heart', 'star', 'bell', 'user', 'home', 'cog'];
+  private iconSizes: ('sm' | 'md' | 'lg')[] = ['sm', 'md', 'lg'];
+  private iconColors: string[] = ['#28a745', '#ffc107', '#dc3545', '#17a2b8', '#007bff', '#6c757d', '#ff0000'];
+
+  private currentTypeIndex: number = 0;
+  private currentIconIndex: number = 0;
+  private currentSizeIndex: number = 1; // Inicia en 'md'
+  private currentColorIndex: number = 0;
+
+  // Métodos para cambiar propiedades dinámicamente
+  changeType(): void {
+    this.currentTypeIndex = (this.currentTypeIndex + 1) % this.types.length;
+    this.messageType = this.types[this.currentTypeIndex];
+    // Actualizar mensaje e icono por defecto según el tipo
+    this.message = this.messages[this.messageType];
+    this.iconName = this.icons[this.messageType];
+  }
+
+  changeMessage(): void {
+    const customMessages = [
+      'Mensaje personalizado número 1',
+      'Este es otro ejemplo de mensaje dinámico',
+      'Puedes cambiar el mensaje en tiempo real',
+      'Los mensajes pueden tener diferentes longitudes y contenido'
+    ];
+    const randomIndex = Math.floor(Math.random() * customMessages.length);
+    this.message = customMessages[randomIndex];
+  }
+
+  changeIcon(): void {
+    this.currentIconIndex = (this.currentIconIndex + 1) % this.iconNames.length;
+    this.iconName = this.iconNames[this.currentIconIndex];
+  }
+
+  changeIconSize(): void {
+    this.currentSizeIndex = (this.currentSizeIndex + 1) % this.iconSizes.length;
+    this.iconSize = this.iconSizes[this.currentSizeIndex];
+  }
+
+  changeIconColor(): void {
+    this.currentColorIndex = (this.currentColorIndex + 1) % this.iconColors.length;
+    this.iconColor = this.iconColors[this.currentColorIndex];
+  }
+}
+```

@@ -14,6 +14,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { LegendComponent } from './components/legend/legend.component';
 import { TagComponent } from './components/tag/tag.component';
 import { TableServerComponent } from './components/table-server/table-server.component';
+import { MessageBoxComponent } from './components/message-box/message-box.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/boton', pathMatch: 'full' },
@@ -29,6 +30,8 @@ const routes: Routes = [
   { path: 'legend', component: LegendComponent },
   { path: 'tag', component: TagComponent },
   { path: 'table-server', component: TableServerComponent },
+  // { path: 'table-client', component: TableClientComponent },
+  { path: 'message-box', component: MessageBoxComponent },
 ];
 
 @NgModule({

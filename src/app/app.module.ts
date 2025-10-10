@@ -26,6 +26,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { LegendComponent } from './components/legend/legend.component';
 import { TagComponent } from './components/tag/tag.component';
 import { TableServerComponent } from './components/table-server/table-server.component';
+import { MessageBoxComponent } from './components/message-box/message-box.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { TableServerComponent } from './components/table-server/table-server.com
     LegendComponent,
     TagComponent,
     TableServerComponent,
+    MessageBoxComponent,
   ],
   imports: [
     BrowserModule,

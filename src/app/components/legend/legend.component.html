@@ -1,72 +1,29 @@
 <section class="p-4">
-  <h1 class="mb-4">Ejemplos del Componente sa-legend</h1>
 
-  <!-- ========== PROPIEDADES BÁSICAS ========== -->
+  <!-- ========== EJEMPLO COMBINADO (Todas las propiedades juntas) ========== -->
   <div class="mb-5">
-    <h2 class="mb-3">Propiedades Básicas</h2>
-    <div class="row g-3">
-      <div class="col-md-12">
-        <h5>Ejemplo completo con todas las propiedades</h5>
-        <div class="d-flex align-items-center gap-3">
-          <div class="d-flex align-items-center gap-2">
-            <sa-legend color="#36AD55" tooltip="Ventas completadas" tooltipPosition="top"></sa-legend>
-            <span>Pasa el mouse sobre el cuadro</span>
-          </div>
-        </div>
-        <pre class="mt-2"><code>&lt;sa-legend color="#36AD55" tooltip="Ventas completadas" tooltipPosition="top"&gt;&lt;/sa-legend&gt;</code></pre>
-      </div>
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades</h2>
+    <!-- ========== TODO ========== -->
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+      <sa-legend
+        [color]="legendColor"
+        [tooltip]="legendTooltip"
+        [tooltipPosition]="tooltipPosition"
+        [class]="customClass">
+      </sa-legend>
+    </div>
+
+    <div style="margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+      <button class="btn btn-sm btn-outline-primary" (click)="changeColor()">
+        Cambiar Color
+      </button>
+      <button class="btn btn-sm btn-outline-info" (click)="changeTooltip()">
+        Cambiar Mensaje Tooltip
+      </button>
+      <button class="btn btn-sm btn-outline-success" (click)="changeTooltipPosition()">
+        Cambiar Posición Tooltip ({{ tooltipPosition }})
+      </button>
     </div>
   </div>
 
-  <!-- ========== DIFERENTES COLORES ========== -->
-  <div class="mb-5">
-    <h2 class="mb-3">Diferentes Colores</h2>
-    <div class="row g-3">
-      <div class="col-md-12">
-        <h5 class="mb-3">Leyendas con diferentes colores</h5>
-        <div class="d-flex gap-4 flex-wrap">
-          <div *ngFor="let leyenda of leyendasColores" class="d-flex align-items-center gap-2">
-            <sa-legend [color]="leyenda.color" [tooltip]="'Color: ' + leyenda.color"></sa-legend>
-            <span>{{ leyenda.label }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== POSICIONES DEL TOOLTIP ========== -->
-  <div class="mb-5">
-    <h2 class="mb-3">Posiciones del Tooltip</h2>
-    <div class="row g-3">
-      <div class="col-md-12">
-        <p class="text-muted mb-3">Las leyendas pueden mostrar tooltips en diferentes posiciones:</p>
-        <div class="d-flex flex-column align-items-center gap-4">
-          <!-- Tooltip TOP -->
-          <div class="text-center">
-            <p class="text-muted mb-2">Posición: <strong>TOP</strong></p>
-            <sa-legend color="#007bff" tooltip="Tooltip arriba" tooltipPosition="top"></sa-legend>
-          </div>
-
-          <!-- Tooltips LEFT y RIGHT -->
-          <div class="d-flex justify-content-center align-items-center gap-5">
-            <div class="text-center">
-              <p class="text-muted mb-2">Posición: <strong>LEFT</strong></p>
-              <sa-legend color="#28a745" tooltip="Tooltip izquierda" tooltipPosition="left"></sa-legend>
-            </div>
-
-            <div class="text-center">
-              <p class="text-muted mb-2">Posición: <strong>RIGHT</strong></p>
-              <sa-legend color="#ffc107" tooltip="Tooltip derecha" tooltipPosition="right"></sa-legend>
-            </div>
-          </div>
-
-          <!-- Tooltip BOTTOM -->
-          <div class="text-center">
-            <p class="text-muted mb-2">Posición: <strong>BOTTOM</strong></p>
-            <sa-legend color="#dc3545" tooltip="Tooltip abajo" tooltipPosition="bottom"></sa-legend>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>

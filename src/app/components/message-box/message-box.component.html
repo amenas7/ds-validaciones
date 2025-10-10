@@ -1,0 +1,35 @@
+<section class="p-4">
+
+  <!-- ========== EJEMPLO COMBINADO (Todas las propiedades juntas) ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades</h2>
+    <!-- ========== TODO ========== -->
+    <sa-messagebox
+      [message]="message"
+      [type]="messageType"
+      [iconName]="iconName"
+      [iconSize]="iconSize"
+      [iconColor]="iconColor"
+      [class]="customClass">
+    </sa-messagebox>
+
+    <div class="mt-4">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="changeType()">
+        Cambiar Tipo ({{ messageType }})
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="changeMessage()">
+        Cambiar Mensaje
+      </button>
+      <button class="btn btn-sm btn-outline-success me-2" (click)="changeIcon()">
+        Cambiar Icono ({{ iconName }})
+      </button>
+      <button class="btn btn-sm btn-outline-warning me-2" (click)="changeIconSize()">
+        Cambiar Tamaño Icono ({{ iconSize }})
+      </button>
+      <button class="btn btn-sm btn-outline-danger me-2" (click)="changeIconColor()">
+        Cambiar Color Icono
+      </button>
+    </div>
+  </div>
+
+</section>

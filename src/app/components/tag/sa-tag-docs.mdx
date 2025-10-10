@@ -1,12 +1,44 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Legend/Legend Example" />
+
+# 📚 Code Example - sa-legend
+
+### HTML Template
+```html
+<div style="display: flex; justify-content: center; align-items: center; min-height: 120px;">
+  <sa-tag
+    [text]="tagText"
+    [type]="tagType"
+    [size]="tagSize"
+    [class]="customClass">
+  </sa-tag>
+</div>
+
+<div style="margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+  <button class="btn btn-sm btn-outline-primary" (click)="changeText()">
+    Cambiar Texto
+  </button>
+  <button class="btn btn-sm btn-outline-info" (click)="changeType()">
+    Cambiar Tipo ({{ tagType }})
+  </button>
+  <button class="btn btn-sm btn-outline-success" (click)="changeSize()">
+    Cambiar Tamaño ({{ tagSize }})
+  </button>
+</div>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tag',
-  templateUrl: './tag.component.html',
-  styleUrl: './tag.component.scss'
+  ......
 })
-export class TagComponent {
-  // Propiedades dinámicas para el ejemplo
+
+export class ........ {
+// Propiedades dinámicas para el ejemplo
   tagText: string = 'Angular';
   tagType: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' = 'success';
   tagSize: 'small' | 'medium' | 'large' = 'medium';
@@ -38,5 +70,5 @@ export class TagComponent {
     this.currentSizeIndex = (this.currentSizeIndex + 1) % this.sizes.length;
     this.tagSize = this.sizes[this.currentSizeIndex];
   }
-
 }
+```
